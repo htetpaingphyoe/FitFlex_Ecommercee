@@ -1,0 +1,19 @@
+CREATE TABLE admins (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    address TEXT,
+    NRC VARCHAR(20) UNIQUE NOT NULL, -- Assuming NRC is a unique identifier
+    ph_num VARCHAR(15) NOT NULL,
+    gmail VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL -- Store hashed passwords, not plain text
+);
+CREATE TABLE users (
+    User_Id INT AUTO_INCREMENT PRIMARY KEY,
+    First_name VARCHAR(50) NOT NULL,
+    Last_name VARCHAR(50) NOT NULL,
+    Address TEXT,
+    Ph_number VARCHAR(15),
+    Gmail VARCHAR(50),
+    Password TEXT
+);
