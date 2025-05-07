@@ -1,0 +1,68 @@
+CREATE TABLE admins (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    address TEXT,
+    NRC VARCHAR(20) UNIQUE NOT NULL, -- Assuming NRC is a unique identifier
+    ph_num VARCHAR(15) NOT NULL,
+    gmail VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL -- Store hashed passwords, not plain text
+);
+CREATE TABLE users (
+    User_Id INT AUTO_INCREMENT PRIMARY KEY,
+    First_name VARCHAR(50) NOT NULL,
+    Last_name VARCHAR(50) NOT NULL,
+    Address TEXT,
+    Ph_number VARCHAR(15),
+    Gmail VARCHAR(50),
+    Password TEXT
+);
+CREATE TABLE products (
+    Product_ID INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each product
+    Name VARCHAR(100) NOT NULL,               -- Product name
+    Description TEXT,                         -- Product description
+    Category VARCHAR(50),                     -- Product category (e.g., Sportswear, Shoes)
+    Brand VARCHAR(50),
+    Size VARCHAR(50),                         -- Fixed size of the product (e.g., "XL")
+    Color TEXT,
+    Price DECIMAL(10, 2) NOT NULL,            -- Product price
+    Stock_Quantity INT NOT NULL,              -- Quantity in stock
+    Image_URL VARCHAR(255),                   -- URL of the product image
+    Created_At TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp of product creation
+);
+CREATE TABLE wishlist (
+    wishlist_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL, -- Foreign key to link to the user
+    product_id INT NOT NULL, -- Foreign key to link to the product
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Timestamp when the product was added
+    FOREIGN KEY (user_id) REFERENCES users(user_id), -- Replace 'users' with your user table
+    FOREIGN KEY (product_id) REFERENCES products(Product_ID) -- Replace 'products' with your product table
+);
+-- Step 1: Create the sales table
+CREATE TABLE sales (
+    sale_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each order
+    user_id INT NOT NULL, -- ID of the user who placed the order
+    total_qty INT NOT NULL, -- Total quantity of items in the order
+    total_amount DECIMAL(10, 2) NOT NULL, -- Total amount of the order
+    ordered_at DATETIME DEFAULT CURRENT_TIMESTAMP, -- Timestamp when the order was placed
+    payment_type VARCHAR(50), -- Payment type (e.g., Card, PayPal)
+    shipping_address TEXT
+);
+
+-- Step 2: Create the sale_detail table
+CREATE TABLE sale_detail (
+    saledetail_id INT AUTO_INCREMENT PRIMARY KEY, -- Unique ID for each order line
+    sale_id INT NOT NULL, -- ID of the order this line belongs to
+    user_id INT NOT NULL, -- ID of the user who placed the order
+    product_id INT NOT NULL, -- ID of the product in the order
+    qty INT NOT NULL, -- Quantity of the product
+    price DECIMAL(10, 2) NOT NULL, -- Price of the product
+    FOREIGN KEY (sale_id) REFERENCES sales(sale_id) ON DELETE CASCADE -- Cascade delete if the order is deleted
+);
+
+CREATE TABLE password_resets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    expires DATETIME NOT NULL
+);

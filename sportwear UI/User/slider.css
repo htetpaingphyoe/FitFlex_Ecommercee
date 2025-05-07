@@ -61,12 +61,12 @@
     width: 30px;
 }
 #secondslider{
-    background-image: url(../img/secondslidercover.jpg);
+    background-image: url(img/secondslidercover.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
 #thirdslider{
-    background-image: url(../img/thirdslidercover.jpg);
+    background-image: url(img/thirdslidercover.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

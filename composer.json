@@ -1,0 +1,7 @@
+{
+    "name": "ecomweb/fitflex",
+    "description": "hello this is fitflex website!",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
